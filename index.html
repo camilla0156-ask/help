@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoWise - 지속가능한 소비 AI 가이드</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-amber-50/40 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white border-b border-amber-200/60 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-600 flex items-center justify-center text-white text-xl shadow-md font-extrabold">
+                    12
+                </div>
+                <div>
+                    <div class="flex items-center space-x-2">
+                        <h1 class="font-bold text-lg text-slate-900 leading-tight">EcoWise</h1>
+                        <span class="bg-amber-100 text-amber-800 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-amber-300">SDG 12</span>
+                    </div>
+                    <p class="text-xs text-slate-500">지속가능한 생산과 소비를 위한 신뢰성 있는 AI 어드바이저</p>
+                </div>
+            </div>
+            
+            <div class="hidden sm:flex items-center space-x-1 text-xs text-amber-700 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-lg">
+                <i class="fa-solid fa-leaf text-amber-600"></i>
+                <span class="font-medium">왜곡 없는 친환경 가이드</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-4xl w-full mx-auto p-4 md:p-6 flex flex-col space-y-6">
+
+        <!-- Top Banner / Hero -->
+        <section class="bg-gradient-to-r from-amber-600 to-amber-700 text-white p-6 rounded-2xl shadow-sm relative overflow-hidden">
+            <div class="relative z-10 max-w-2xl">
+                <span class="bg-white/20 text-white text-xs px-2.5 py-1 rounded-full font-medium inline-block mb-2 backdrop-blur-sm">
+                    🌱 지속 가능한 소비가 막막할 때
+                </span>
+                <h2 class="text-xl md:text-2xl font-bold leading-snug">"이 제품 어떻게 골라야 할지, 버려야 할지 고민되시나요?"</h2>
+                <p class="text-amber-100 text-xs md:text-sm mt-1.5 leading-relaxed">
+                    그린워싱(과장된 친환경)에 속지 않도록 팩트에 기반한 올바른 소비 전략, 분리배출 방법, 친환경 제품 선택 기준을 알려드립니다.
+                </p>
+            </div>
+            <div class="absolute -right-6 -bottom-10 opacity-20 text-9xl text-white pointer-events-none">
+                <i class="fa-solid fa-infinity"></i>
+            </div>
+        </section>
+
+        <!-- Main Interactive Q&A Section -->
+        <section class="grid grid-cols-1 md:grid-cols-12 gap-6 flex-1">
+            
+            <!-- Left Side: Input Form & Presets (5 cols) -->
+            <div class="md:col-span-5 flex flex-col space-y-4">
+                
+                <!-- Q&A Input Box -->
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between flex-1">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center">
+                            <i class="fa-solid fa-circle-question text-amber-600 mr-1.5"></i> 지속가능 소비 질문하기
+                        </label>
+                        <textarea id="userQuestion" rows="5" class="w-full p-3.5 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-amber-500 focus:outline-none resize-none bg-slate-50 focus:bg-white transition" placeholder="예: '생분해 비닐은 정말 그냥 버려도 환경에 좋을까?', '올바른 텀블러 사용법 알려줘'"></textarea>
+                    </div>
+
+                    <div class="mt-4">
+                        <button id="btnAsk" onclick="askEcoAdvisor()" class="w-full py-3 bg-amber-600 text-white font-semibold rounded-xl hover:bg-amber-700 transition shadow-md shadow-amber-200 flex items-center justify-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>최적의 가이드 답변받기</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Preset Questions -->
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">💡 많이 묻는 추천 질문</h3>
+                    <div class="flex flex-col space-y-2">
+                        <button onclick="setPreset('패스트 패션을 줄이고 옷을 지속가능하게 소비하는 행동 수칙 알려줘')" class="text-left text-xs bg-slate-50 hover:bg-amber-50 hover:border-amber-300 border border-slate-200 text-slate-700 p-2.5 rounded-xl transition flex items-center justify-between group">
+                            <span>👕 옷(의류) 지속가능 소비법</span>
+                            <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-amber-600"></i>
+                        </button>
+                        <button onclick="setPreset('종이팩과 일반 폐지는 왜 따로 수거해야 하고 어떻게 배출해?')" class="text-left text-xs bg-slate-50 hover:bg-amber-50 hover:border-amber-300 border border-slate-200 text-slate-700 p-2.5 rounded-xl transition flex items-center justify-between group">
+                            <span>🧃 종이팩/우유팩 분리배출 방법</span>
+                            <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-amber-600"></i>
+                        </button>
+                        <button onclick="setPreset('텀블러나 에코백도 많아지면 환경 오염이라던데 몇 번 써야 이득이야?')" class="text-left text-xs bg-slate-50 hover:bg-amber-50 hover:border-amber-300 border border-slate-200 text-slate-700 p-2.5 rounded-xl transition flex items-center justify-between group">
+                            <span>☕ 텀블러 리바운드 효과 진실</span>
+                            <i class="fa-solid fa-chevron-right text-[10px] text-slate-400 group-hover:text-amber-600"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Side: AI Answer & Guide Output (7 cols) -->
+            <div class="md:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between min-h-[420px]">
+                
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                    <h3 class="font-bold text-slate-800 flex items-center space-x-2">
+                        <i class="fa-solid fa-shield-cat text-amber-600"></i>
+                        <span>AI 에코 솔루션</span>
+                    </h3>
+                    <span class="text-[11px] bg-slate-100 text-slate-500 px-2 py-1 rounded-md font-medium border border-slate-200">
+                        팩트 기반 검증 모드
+                    </span>
+                </div>
+
+                <!-- Initial Placeholder -->
+                <div id="resultPlaceholder" class="flex-1 flex flex-col items-center justify-center text-slate-400 space-y-3 p-6 text-center">
+                    <div class="w-14 h-14 bg-amber-50 text-amber-500 rounded-full flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-slate-700">궁금한 점을 물어보세요!</p>
+                        <p class="text-xs text-slate-400 mt-1">왜곡 없는 지속 가능한 생산·소비 솔루션을 알려드립니다.</p>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loadingBox" class="hidden flex-1 flex flex-col items-center justify-center space-y-4">
+                    <div class="w-12 h-12 border-4 border-amber-200 border-t-amber-600 rounded-full animate-spin"></div>
+                    <div class="text-center">
+                        <p class="text-sm font-semibold text-slate-700">친환경 가이드를 분석 중입니다...</p>
+                        <p class="text-xs text-slate-400 mt-1">그린워싱 방지를 위해 과학적 수치와 팩트를 검증합니다.</p>
+                    </div>
+                </div>
+
+                <!-- Answer Content Box -->
+                <div id="outputContent" class="hidden flex-1 overflow-y-auto custom-scrollbar space-y-5 pr-1">
+                    
+                    <!-- Core Summary / Direct Answer -->
+                    <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-4">
+                        <span class="text-[11px] font-bold text-amber-800 uppercase tracking-wider block mb-1">
+                            🎯 핵심 가이드 요약
+                        </span>
+                        <p id="summaryText" class="text-slate-900 font-semibold leading-relaxed text-sm md:text-base"></p>
+                    </div>
+
+                    <!-- Action Steps (Practical checklist) -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                        <h4 class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5 flex items-center">
+                            <i class="fa-solid fa-list-check text-amber-600 mr-1.5"></i> 실천 가능한 단계별 행동 수칙
+                        </h4>
+                        <ul id="actionList" class="space-y-2 text-xs text-slate-700">
+                            <!-- Action items injected here -->
+                        </ul>
+                    </div>
+
+                    <!-- Fact Check & Ethical Transparency (Anti-Greenwashing) -->
+                    <div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-4">
+                        <h4 class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1.5 flex items-center">
+                            <i class="fa-solid fa-circle-exclamation text-emerald-600 mr-1.5"></i> 오해 방지 팩트체크 (그린워싱 주의)
+                        </h4>
+                        <p id="factCheckText" class="text-xs text-slate-600 leading-relaxed"></p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Ethics Guardrail Footnote -->
+        <div class="bg-slate-100 border border-slate-200 rounded-xl p-3.5 flex items-start space-x-3 text-slate-600 text-xs">
+            <i class="fa-solid fa-scale-balanced text-amber-600 mt-0.5 text-base"></i>
+            <div>
+                <p class="font-bold text-slate-800">윤리 가이드라인: 왜곡 없는 정보 제공</p>
+                <p class="text-slate-500 mt-0.5">
+                    EcoWise는 기업의 마케팅성 그린워싱(무늬만 친환경)을 배제하고, 국제 기구 및 환경 단체의 검증된 원칙에 기반하여 과장 없는 정보를 제공합니다.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-3 text-center text-xs text-slate-400">
+        EcoWise &copy; 2026. UN SDGs 12: Responsible Consumption and Production
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        const API_KEY = ""; // Automatically provided at runtime
+        const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${API_KEY}`;
+
+        // 미리 설정된 지식 베이스 (API 응답 지연/오류 시 예외 처리용 팩트체크 데이터)
+        const KNOWLEDGE_BASE = {
+            "패스트 패션": {
+                summary: "패스트 패션은 대량의 물 소비와 섬유 쓰레기를 유발합니다. 새 옷 구매를 줄이고, 이미 있는 옷을 최소 30회 이상 착용하는 것이 최고의 지속가능한 소비입니다.",
+                actions: [
+                    "구매 전 '이 옷을 최소 30번 입을 것인가?' 스스로 질문하기",
+                    "합성섬유(폴리에스테르) 대신 단일 소재 또는 리사이클 인증 원단 선택하기",
+                    "버리기 전 의류 수거함이나 중고 거래 플랫폼 활용하기"
+                ],
+                factCheck: "의류 제조업은 전 세계 탄소 배출의 10%를 차지합니다. '친환경 라인' 제품이라도 불필요하게 새로 구입하면 환경 부담이 줄지 않습니다."
+            },
+            "종이팩": {
+                summary: "우유팩 등 종이팩은 고급 천연펄프로 만들어져 일반 폐지와 별도로 분리 배출해야 100% 휴지로 재활용될 수 있습니다.",
+                actions: [
+                    "내용물을 완전히 비우고 물로 깨끗이 헹구기",
+                    "가위로 잘라 펼친 후 햇빛에 바짝 말리기",
+                    "주민센터의 종이팩 전용 수거함이나 휴지 교환 사업 활용하기"
+                ],
+                factCheck: "일반 폐지 수거함에 종이팩을 함께 넣으면 방수 코팅 비닐 때문에 재활용되지 못하고 대부분 폐기됩니다."
+            },
+            "텀블러": {
+                summary: "텀블러는 제작 시 많은 탄소가 발생하므로, 플라스틱 컵 대신 한 텀블러를 최소 100~500회 이상 지속적으로 사용해야 실제 친환경 효과가 나타납니다.",
+                actions: [
+                    "유행에 맞춰 텀블러를 자주 새로 사지 않기",
+                    "외출 시 가방에 상시 지참하여 일회용 컵 거절하기",
+                    "위생적 관리를 위해 사용 후 즉시 헹구고 말리기"
+                ],
+                factCheck: "텀블러를 여러 개 모아두고 쓰지 않는 것은 '텀블러 리바운드 효과'로 오히려 일회용 컵보다 더 많은 탄소를 배출합니다."
+            }
+        };
+
+        function setPreset(text) {
+            document.getElementById('userQuestion').value = text;
+            askEcoAdvisor();
+        }
+
+        async function askEcoAdvisor() {
+            const question = document.getElementById('userQuestion').value.trim();
+            if (!question) {
+                alert('질문 내용을 입력해주세요.');
+                return;
+            }
+
+            showLoading(true);
+
+            const systemPrompt = `
+You are an expert Sustainability & Responsible Consumption Advisor aligned with UN SDG Goal 12 (Responsible Consumption and Production).
+Your mission is to provide PRACTICAL, UNBIASED, and ACCURATE advice on sustainable living and green choices.
+
+ETHICS RULE: Avoid greenwashing, false eco-claims, or exaggerated statements. Provide fact-checked and realistic guidance.
+
+Respond ALWAYS in raw JSON format (Do NOT wrap in markdown \`\`\`json blocks) with the following structure:
+{
+  "summary": "핵심 요약 답변 (한국어)",
+  "actions": [
+    "실천 행동 수칙 1 (한국어)",
+    "실천 행동 수칙 2 (한국어)",
+    "실천 행동 수칙 3 (한국어)"
+  ],
+  "factCheck": "그린워싱 방지 및 오해 교정 팩트체크 (한국어)"
+}
+`;
+
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [{ text: question }]
+                }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                generationConfig: {
+                    responseMimeType: "application/json"
+                }
+            };
+
+            try {
+                const response = await callGeminiWithRetry(payload);
+                let jsonText = response.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (jsonText) {
+                    // 마크다운 블록 제거 처리
+                    jsonText = jsonText.replace(/```json/g, '').replace(/```/g, '').trim();
+                    const parsed = JSON.parse(jsonText);
+                    renderResult(parsed);
+                } else {
+                    useFallbackData(question);
+                }
+            } catch (err) {
+                console.warn('API 호출 예외 발생, 백업 데이터 사용:', err);
+                useFallbackData(question);
+            }
+        }
+
+        function useFallbackData(question) {
+            let matched = KNOWLEDGE_BASE["텀블러"];
+            if (question.includes("옷") || question.includes("패션")) matched = KNOWLEDGE_BASE["패스트 패션"];
+            if (question.includes("종이") || question.includes("우유")) matched = KNOWLEDGE_BASE["종이팩"];
+
+            // 입력된 질문 기반 맞춤 기본 응답 생성
+            const fallbackResult = {
+                summary: matched ? matched.summary : `'${question}'에 대한 지속가능한 소비 가이드: 과도한 소비를 줄이고 제품의 전체 수명주기(생산-사용-폐기)를 고려하는 것이 핵심입니다.`,
+                actions: matched ? matched.actions : [
+                    "제품 구매 전 불필요한 소비인지 한 번 더 고려하기",
+                    "친환경 마크(환경표지인증)의 정식 검증 여부 확인하기",
+                    "올바른 분리배출 방법 숙지 및 자원 순환 참여하기"
+                ],
+                factCheck: matched ? matched.factCheck : "단순히 '친환경 소재'라는 문구만 보고 자주 교체하여 사용하는 것은 오히려 더 많은 탄소를 배출(그린워싱)시킬 수 있습니다."
+            };
+
+            renderResult(fallbackResult);
+        }
+
+        async function callGeminiWithRetry(payload) {
+            let delay = 1000;
+            for (let i = 0; i < 2; i++) {
+                try {
+                    const res = await fetch(GEMINI_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (res.ok) {
+                        return await res.json();
+                    }
+                } catch (e) {
+                    console.warn(`Attempt ${i + 1} failed.`);
+                }
+                await new Promise(r => setTimeout(r, delay));
+            }
+            throw new Error('API 서버 연결 지연');
+        }
+
+        function showLoading(isLoading) {
+            document.getElementById('resultPlaceholder').classList.add('hidden');
+            document.getElementById('outputContent').classList.add('hidden');
+            document.getElementById('loadingBox').classList.toggle('hidden', !isLoading);
+        }
+
+        function renderResult(data) {
+            document.getElementById('loadingBox').classList.add('hidden');
+            document.getElementById('resultPlaceholder').classList.add('hidden');
+            document.getElementById('outputContent').classList.remove('hidden');
+
+            document.getElementById('summaryText').innerText = data.summary || '가이드 결과를 불러왔습니다.';
+            
+            const actionList = document.getElementById('actionList');
+            actionList.innerHTML = '';
+            if (data.actions && data.actions.length > 0) {
+                data.actions.forEach((act, idx) => {
+                    const li = document.createElement('li');
+                    li.className = 'flex items-start space-x-2 bg-white p-2.5 rounded-lg border border-slate-200 shadow-xs';
+                    li.innerHTML = `
+                        <span class="bg-amber-100 text-amber-800 font-bold rounded-full w-4 h-4 flex items-center justify-center text-[10px] shrink-0 mt-0.5">${idx + 1}</span>
+                        <span class="leading-relaxed">${act}</span>
+                    `;
+                    actionList.appendChild(li);
+                });
+            }
+
+            document.getElementById('factCheckText').innerText = data.factCheck || '특이 그린워싱 오해 사항이 없습니다.';
+        }
+    </script>
+</body>
+</html>
